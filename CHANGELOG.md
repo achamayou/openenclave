@@ -27,13 +27,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The default memory allocator (dlmalloc) can be replaced by providing replacement functions. This ability to plug-in
   a custom allocator is most applicable for multi-threaded enclaves with memory allocation patterns where the default
   memory allocator may not be performant. See [Pluggable Allocators](docs/DesignDocs/Pluggableallocators.md).
+- Gcov is used to obtain code coverage information for the SDK. See [Code Coverage](docs/GettingStartedDocs/Contributors/CodeCoverage.md).
+
 
 ### Changed
-- Mark APIs in include/openenclave/attestation/sgx/attester.h and verifier.h as experimental.
-- Remove CRL_ISSUER_CHAIN_PCK_PROC_CA field from endorsement struct define in include/openenclave/bits/attestation.h.
 - `COMPILE_SYSTEM_EDL` is now OFF by default, meaning system EDL must be imported by
   application EDL. See [system EDL opt-in document]
   (docs/DesignDocs/system_ocall_opt_in.md#how-to-port-your-application) for more information.
+  - Note: SDK users would need to import logging.edl to enable logging. Logging is disabled by default.
+- Mark APIs in include/openenclave/attestation/sgx/attester.h and verifier.h as experimental.
+- Remove CRL_ISSUER_CHAIN_PCK_PROC_CA field from endorsement struct define in include/openenclave/bits/attestation.h.
 - Switch to oeedger8r written in C++.
 - Fix #3143. oesign tool will now reject .conf files that contain duplicate property definitions.
 - SGX Simulation Mode does not need SGX libraries to be present in the system.
@@ -44,6 +47,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The Deep-copy feature of oeedger8r is now enabled by default.
 - The oeedger8r-generated header files now contain only the function prototypes. Marshalling structs, function id enums,
   and function tables are generated only in the c files.
+- Docs and scripts updated to use Azure DCAP client v1.6.0.
+- Fix #2930. Fixes the logic of detecting compilers when LVI mitigation is enabled. That is, the old logic always picks clang-7 (if installed) regardless of whether the environment variable CC is set to gcc.
+- Fix #2670. This fix also allows users to specify the version of clang (default is clang-7) when building the helloworld sample with LVI mitigation.
+- Fix #3056. oe_is_within_enclave() and oe_is_outside_enclave() now reflect the SGX enclave boundary as determined by the enclave SECS rather than the limit of the pages initially provisioned in to the enclave.
+- If not specified, CMAKE_BUILD_TYPE is set to Debug. This ensures that cmake and cmake -DCMAKE_BUILD_TYPE=Debug result in the same build configuration.
 
 ### Removed
 - Removed oehostapp and the appendent "-rdynamic" compiling option. Please use oehost instead and add the option back manually if necessary.

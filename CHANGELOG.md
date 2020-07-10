@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The default memory allocator (dlmalloc) can be replaced by providing replacement functions. This ability to plug-in
   a custom allocator is most applicable for multi-threaded enclaves with memory allocation patterns where the default
   memory allocator may not be performant. See [Pluggable Allocators](docs/DesignDocs/Pluggableallocators.md).
+- `snmalloc` is available as a pluggable allocator library `oesnmalloc`. An enclave can use snmalloc instead of
+  dlmalloc by specifying `liboesnmalloc.a` before `liboelibc.a` and `liboecore.a` in the linker line.
+- Added pluggable_allocator sample.
 
 ### Changed
 - Mark APIs in include/openenclave/attestation/sgx/attester.h and verifier.h as experimental.

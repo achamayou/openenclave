@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   application EDL. See [system EDL opt-in document]
   (docs/DesignDocs/system_ocall_opt_in.md#how-to-port-your-application) for more information.
   - Note: SDK users would need to import logging.edl to enable logging. Logging is disabled by default.
+  - See [System edls](docs/SystemEdls.md) for list of all edls and associated OCalls.
 - Mark APIs in include/openenclave/attestation/sgx/attester.h and verifier.h as experimental.
 - Remove CRL_ISSUER_CHAIN_PCK_PROC_CA field from endorsement struct define in include/openenclave/bits/attestation.h.
 - Switch to oeedger8r written in C++.
